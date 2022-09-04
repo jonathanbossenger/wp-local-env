@@ -2,8 +2,8 @@
 
 #!/bin/bash
 
-VM_IP=192.168.64.2
-VM_NAME=triangle
+VM_IP=192.168.64.1
+VM_NAME=wp-local-env
 HOME_USER=jonathanbossenger
 
 SITE_NAME=$1

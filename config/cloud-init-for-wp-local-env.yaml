@@ -52,7 +52,7 @@ runcmd:
   - a2enmod ssl
   - a2enmod rewrite
   - service apache2 restart
-  # Create directory to save phpmyadmin and MailHog data
+  # Create directory to save phpmyadmin data
   - mkdir /run/phpmyadmin
   # PHPMyAdmin
   - echo "Installing PHPMyAdmin"
