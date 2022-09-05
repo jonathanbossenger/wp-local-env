@@ -27,3 +27,15 @@ chmod +x ./scripts/os/sitesetup.sh
 chmod +x ./scripts/os/sitedrop.sh
 sudo cp ./scripts/os/sitesetup.sh /usr/local/bin/sitesetup
 sudo cp ./scripts/os/sitedrop.sh /usr/local/bin/sitedrop
+
+
+# Setup /etc/hosts record for wp-local-env.test
+INSTANCE_DATA=$( multipass info --format json wp-local-env )
+read -r -d '' JXA <<EOF
+function run() {
+	var info = JSON.parse(\`$INSTANCE_DATA\`);
+	return info.info["wp-local-env"].ipv4;
+}
+EOF
+INSTANCE_IP=$( osascript -l 'JavaScript' <<< "${JXA}" )
+echo "$INSTANCE_IP    wp-local-env.test" >> /etc/hosts

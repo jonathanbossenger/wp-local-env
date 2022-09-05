@@ -1,9 +1,9 @@
-!/bin/bash
+#!/bin/bash
 
 SITE_NAME=$1
 
-SSL_CERTS_DIRECTORY=/home/ubuntu/ssl-certs
-SITES_DIRECTORY=/home/ubuntu/sites
+SSL_CERTS_DIRECTORY=/home/ubuntu/wp-local-env/ssl-certs
+SITES_DIRECTORY=/home/ubuntu/wp-local-env/sites
 
 MYSQL_DATABASE=$(echo $SITE_NAME | sed 's/[^a-zA-Z0-9]//g')
 SITE_CONFIG_PATH=/etc/apache2/sites-available/$SITE_NAME.conf
