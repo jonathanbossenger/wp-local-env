@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# install
+# Installer
 # curl -o- https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/macos/install.sh > install.sh
 
 # Launch the new instance
