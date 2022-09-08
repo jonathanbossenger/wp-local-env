@@ -6,7 +6,7 @@ VM_NAME=wp-local-env
 VM_DATA=$( multipass info --format json wp-local-env )
 read -r -d '' JXA <<EOF
 function run() {
-	var info = JSON.parse(\`VM_DATA\`);
+	var info = JSON.parse(\`$VM_DATA\`);
 	return info.info["wp-local-env"].ipv4;
 }
 EOF

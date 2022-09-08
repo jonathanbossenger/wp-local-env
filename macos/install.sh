@@ -24,8 +24,8 @@ multipass exec wp-local-env -- wget https://raw.githubusercontent.com/jonathanbo
 multipass exec wp-local-env -- wget https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/macos/scripts/multipass/sitedrop.sh
 multipass exec wp-local-env -- chmod +x sitesetup.sh
 multipass exec wp-local-env -- chmod +x sitedrop.sh
-multipass exec wp-local-env -- sudo -u mv sitesetup.sh /usr/local/bin/sitesetup
-multipass exec wp-local-env -- sudo -u mv sitedrop.sh /usr/local/bin/sitedrop
+multipass exec wp-local-env -- sudo -u root mv sitesetup.sh /usr/local/bin/sitesetup
+multipass exec wp-local-env -- sudo -u root mv sitedrop.sh /usr/local/bin/sitedrop
 
 # Install OS Scripts
 curl -o- https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/macos/scripts/os/sitesetup.sh > sitesetup.sh
@@ -44,4 +44,4 @@ function run() {
 }
 EOF
 INSTANCE_IP=$( osascript -l 'JavaScript' <<< "${JXA}" )
-echo "$INSTANCE_IP    wp-local-env.test" >> /etc/hosts
+sudo echo "$INSTANCE_IP    wp-local-env.test" >> /etc/hosts
