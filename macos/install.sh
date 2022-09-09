@@ -11,7 +11,7 @@ rm cloud-init-for-wp-local-env.yaml
 # Install MailHog
 multipass exec wp-local-env -- wget https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/bin/mailhog.sh
 multipass exec wp-local-env -- chmod +x mailhog.sh
-multipass exec wp-local-env -- sudo su ./mailhog.sh
+multipass exec wp-local-env -- sudo su root ./mailhog.sh
 
 # Set up the shared directories
 mkdir -p ~/wp-local-env
@@ -24,8 +24,8 @@ multipass exec wp-local-env -- wget https://raw.githubusercontent.com/jonathanbo
 multipass exec wp-local-env -- wget https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/macos/scripts/multipass/sitedrop.sh
 multipass exec wp-local-env -- chmod +x sitesetup.sh
 multipass exec wp-local-env -- chmod +x sitedrop.sh
-multipass exec wp-local-env -- sudo su mv sitesetup.sh /usr/local/bin/sitesetup
-multipass exec wp-local-env -- sudo su mv sitedrop.sh /usr/local/bin/sitedrop
+multipass exec wp-local-env -- sudo su root mv sitesetup.sh /usr/local/bin/sitesetup
+multipass exec wp-local-env -- sudo su root mv sitedrop.sh /usr/local/bin/sitedrop
 
 # Install OS Scripts
 curl -o- https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/macos/scripts/os/sitesetup.sh > sitesetup.sh
