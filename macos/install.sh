@@ -24,12 +24,9 @@ mkdir -p sites ssl-certs
 
 # Install Server Scripts
 echo "Installing server scripts..."
-multipass exec wp-local-env -- wget https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/macos/scripts/multipass/sitesetup.sh
-multipass exec wp-local-env -- wget https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/macos/scripts/multipass/sitedrop.sh
-multipass exec wp-local-env -- chmod +x sitesetup.sh
-multipass exec wp-local-env -- chmod +x sitedrop.sh
-multipass exec wp-local-env -- sudo su root mv sitesetup.sh /usr/local/bin/sitesetup
-multipass exec wp-local-env -- sudo su root mv sitedrop.sh /usr/local/bin/sitedrop
+multipass exec wp-local-env -- wget https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/bin/server_scripts.sh
+multipass exec wp-local-env -- chmod +x server_scripts.sh
+multipass exec wp-local-env -- sudo su root ./server_scripts.sh
 
 # Install OS Scripts
 echo "Installing OS scripts..."
