@@ -9,18 +9,18 @@ curl -o- https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/
 multipass launch --name wp-local-env --mem 2G --disk 10G --cpus 2 --cloud-init cloud-init-for-wp-local-env.yaml
 rm cloud-init-for-wp-local-env.yaml
 
-# Install MailHog
-echo "Installing MailHog..."
-multipass exec wp-local-env -- wget https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/bin/mailhog.sh
-multipass exec wp-local-env -- chmod +x mailhog.sh
-multipass exec wp-local-env -- sudo su root ./mailhog.sh
-
 # Set up the shared directories
 echo "Setting up shared directories..."
 mkdir -p ~/wp-local-env
 multipass mount ~/wp-local-env wp-local-env:/home/ubuntu/wp-local-env
 cd ~/wp-local-env
 mkdir -p sites ssl-certs
+
+# Install MailHog
+echo "Installing MailHog..."
+multipass exec wp-local-env -- wget https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/bin/mailhog.sh
+multipass exec wp-local-env -- chmod +x mailhog.sh
+multipass exec wp-local-env -- sudo su root ./mailhog.sh
 
 # Install Server Scripts
 echo "Installing server scripts..."
