@@ -29,6 +29,7 @@ runcmd:
   - apt-get install libapache2-mod-fcgid php7.4 php7.4-fpm php7.4-mysql libapache2-mod-php7.4 -y
   - sudo systemctl start php7.4-fpm
   - a2enmod actions alias proxy_fcgi fcgid
+  - service apache2 restart
   # Set up MySQL
   - echo "Installing MySQL"
   - sudo apt install mysql-server -y
@@ -64,7 +65,10 @@ runcmd:
   - echo "max_input_time=360" >> /etc/php/7.4/apache2/conf.d/user.ini
   - echo "extension=soap" >> /etc/php/7.4/apache2/conf.d/user.ini
   - chown ubuntu:ubuntu /etc/php/7.4/apache2/conf.d/user.ini
+  - sed -i s/"user = www-data"/"user = ubuntu"/g /etc/php/7.4/fpm/pool.d/www.conf
+  - sed -i s/"group = www-data"/"group = ubuntu"/g /etc/php/7.4/fpm/pool.d/www.conf
   - service apache2 restart
+  - service php7.4-fpm restart
   # Create directory to save phpmyadmin data
   - mkdir /run/phpmyadmin
   # PHPMyAdmin
