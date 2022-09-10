@@ -35,7 +35,9 @@ Once mkcert is installed, run the following command to install the root certific
 mkcert -install
 ```
 
-### Recommended mkcert installation for Linux
+### Recommended mkcert installation for Linux 
+
+**_Note that these instructions are currently untested_**
 
 1. Install certutil.
 
@@ -68,6 +70,8 @@ mkcert -install
 ```
 
 ### Recommended mkcert installation for Windows
+
+**_Note that these instructions are currently untested_**
 
 1. Install [PowerShell](https://docs.microsoft.com/powershell/) terminal.
 
@@ -112,3 +116,5 @@ This will add a record pointing to the wp-local-env instance and map it to the u
 If everything worked, you should see the default Debian Apache2 page in your browser.
 
 ![Apache 2](assets/debian.png)
+
+## Usage (coming soon)
