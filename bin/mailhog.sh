@@ -2,7 +2,6 @@
 
 # MailHog
 echo "Installing MailHog"
-apt-get install golang-go -y
 mkdir /run/gocode
 echo "export GOPATH=/run/gocode" >> ~/.profile
 source ~/.profile

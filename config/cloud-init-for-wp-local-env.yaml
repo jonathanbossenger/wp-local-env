@@ -4,6 +4,7 @@ packages:
   - software-properties-common
   - unzip
   - zip
+  - golang-go
 runcmd:
   # Setting the hostname
   - echo "Setting the hostname"

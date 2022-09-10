@@ -1,0 +1,12 @@
+# cloud-config
+# See https://jonathanbossenger.com/2022/05/25/configuring-ubuntu-in-multipass-for-local-web-development-on-a-macbook/
+packages:
+  - software-properties-common
+  - unzip
+  - zip
+  - golang-go
+runcmd:
+  # Setting the hostname
+  - echo "Setting the hostname"
+  - echo "wp-local-env" > /etc/hostname
+  - hostname -F /etc/hostname
