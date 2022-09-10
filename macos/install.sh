@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Installer
-# curl -o- https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/macos/install.sh > install.sh
-
 # Launch the new instance
 echo "Launching Multipass VM..."
 curl -o- https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/config/cloud-init-for-wp-local-env.yaml > cloud-init-for-wp-local-env.yaml
