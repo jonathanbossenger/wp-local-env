@@ -51,6 +51,8 @@ function run() {
 }
 EOF
 INSTANCE_IP=$( osascript -l 'JavaScript' <<< "${JXA}" )
-sudo echo "$INSTANCE_IP    wp-local-env.test" >> /etc/hosts
+# sudo echo "$INSTANCE_IP    wp-local-env.test" >> /etc/hosts
+echo "Enter your sudo password to enable the hosts record..."
+echo -n password | sudo -S echo "$INSTANCE_IP    wp-local-env.test" >> /etc/hosts
 
 echo "Done!"
