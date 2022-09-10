@@ -171,6 +171,10 @@ sudo sitesetup mysite 7.4
 
 Currently, only PHP 8.1 or 7.4 are supported. 
 
+### Installing WordPress
+
+You'd think that given this has a `wp` prefix, it would include a way to install WordPress? Well, that was never the point. The point is, and always was, to make something that allowed you to install WordPress in the way you prefer. [Download](https://wordpress.org/download/) and extract the zip to the site directory, use [WP-CLI](https://developer.wordpress.org/cli/commands/core/download/), or use whatever you want. It's up to you. That's the point.
+
 ## Additional Software
 
 wp-local-env comes preinstalled with both the PhpMyAdmin database tool, and the MailHog email testing tool. You can access both tools by visiting the following urls:
