@@ -43,6 +43,10 @@ sudo mv sitedrop.sh /usr/local/bin/sitedrop
 
 # Setup /etc/hosts record for wp-local-env.test
 # echo "Setting up hosts record..."
+curl -o- https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/macos/scripts/os/sitehosts.sh > sitehosts.sh
+chmod +x sitehosts.sh
+sudo mv sitehosts.sh /usr/local/bin/sitehosts
+
 INSTANCE_DATA=$( multipass info --format json wp-local-env )
 read -r -d '' JXA <<EOF
 function run() {
@@ -51,8 +55,4 @@ function run() {
 }
 EOF
 INSTANCE_IP=$( osascript -l 'JavaScript' <<< "${JXA}" )
-# sudo echo "$INSTANCE_IP    wp-local-env.test" >> /etc/hosts
-# echo "Enter your sudo password to enable the hosts record..."
-# echo -n password | sudo -S echo "$INSTANCE_IP    wp-local-env.test" >> /etc/hosts
-
 echo "Done, wp-local-env is ready to use at $INSTANCE_IP!"
