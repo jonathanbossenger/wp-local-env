@@ -2,6 +2,7 @@
 
 SITE_NAME=$1
 VM_NAME=wp-local-env
+HOME_USER=wp-local-env
 
 VM_DATA=$( multipass info --format json wp-local-env )
 read -r -d '' JXA <<EOF
@@ -27,7 +28,7 @@ echo "$VM_IP    $SITE_NAME.test" >> /etc/hosts
 echo "Creating websites directory"
 
 mkdir $SITES_DIRECTORY/"$SITE_NAME"
-chown -R "$USER" $SITES_DIRECTORY/"$SITE_NAME"
+chown -R "$HOME_USER" $SITES_DIRECTORY/"$SITE_NAME"
 
 echo "Provisioning site on Multipass VM..."
 

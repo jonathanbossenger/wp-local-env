@@ -34,6 +34,10 @@ curl -o- https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/
 curl -o- https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/macos/scripts/os/sitedrop.sh > sitedrop.sh
 chmod +x sitesetup.sh
 chmod +x sitedrop.sh
+# replace wp-local-env with $USER
+# https://stackoverflow.com/questions/4247068/sed-command-with-i-option-failing-on-mac-but-works-on-linux
+sed -i .bak s/"HOME_USER=wp-local-env"/"HOME_USER=$USER"/g sitesetup.sh
+rm sitesetup.sh.bak
 sudo mv sitesetup.sh /usr/local/bin/sitesetup
 sudo mv sitedrop.sh /usr/local/bin/sitedrop
 
