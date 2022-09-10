@@ -20,9 +20,15 @@ runcmd:
   # Set up Apache
   - echo "Installing Apache"
   - apt install apache2 -y
-  # Set up PHP
+  # Set up PHP (latest version)
   - echo "Installing PHP"
   - apt install php libapache2-mod-php php-mysql php-common php-xml php-xmlrpc php-curl php-gd php-imagick php-cli php-dev php-imap php-mbstring php-soap php-zip -y
+  # Enable Apache modules
+  - a2enmod ssl rewrite
+  # Set up PHP 7.4 using FastCGI
+  - apt-get install libapache2-mod-fcgid php7.4 php7.4-fpm php7.4-mysql libapache2-mod-php7.4 -y
+  - sudo systemctl start php7.4-fpm
+  - a2enmod actions alias proxy_fcgi fcgid
   # Set up MySQL
   - echo "Installing MySQL"
   - sudo apt install mysql-server -y
@@ -37,8 +43,8 @@ runcmd:
   - sed -i s/"export APACHE_RUN_USER=www-data"/"export APACHE_RUN_USER=ubuntu"/g /etc/apache2/envvars
   - sed -i s/"export APACHE_RUN_GROUP=www-data"/"export APACHE_RUN_GROUP=ubuntu"/g /etc/apache2/envvars
   - sed -i s/"index.html"/"index.php index.html"/g /etc/apache2/mods-enabled/dir.conf
-  # Configure PHP.ini
   - echo "Configuring PHP.ini"
+  - # Configure PHP.ini for 8.1
   - touch /etc/php/8.1/apache2/conf.d/user.ini
   - echo "display_errors=On" >> /etc/php/8.1/apache2/conf.d/user.ini
   - echo "memory_limit=128M" >> /etc/php/8.1/apache2/conf.d/user.ini
@@ -48,10 +54,16 @@ runcmd:
   - echo "max_input_time=360" >> /etc/php/8.1/apache2/conf.d/user.ini
   - echo "extension=soap" >> /etc/php/8.1/apache2/conf.d/user.ini
   - chown ubuntu:ubuntu /etc/php/8.1/apache2/conf.d/user.ini
-  # Enable Apache modules
-  - echo "Enabling Apache modules"
-  - a2enmod ssl
-  - a2enmod rewrite
+  - # Configure PHP.ini for 7.4
+  - touch /etc/php/7.4/apache2/conf.d/user.ini
+  - echo "display_errors=On" >> /etc/php/7.4/apache2/conf.d/user.ini
+  - echo "memory_limit=128M" >> /etc/php/7.4/apache2/conf.d/user.ini
+  - echo "upload_max_filesize=128M" >> /etc/php/7.4/apache2/conf.d/user.ini
+  - echo "post_max_size=1024M" >> /etc/php/7.4/apache2/conf.d/user.ini
+  - echo "max_execution_time=360" >> /etc/php/7.4/apache2/conf.d/user.ini
+  - echo "max_input_time=360" >> /etc/php/7.4/apache2/conf.d/user.ini
+  - echo "extension=soap" >> /etc/php/7.4/apache2/conf.d/user.ini
+  - chown ubuntu:ubuntu /etc/php/7.4/apache2/conf.d/user.ini
   - service apache2 restart
   # Create directory to save phpmyadmin data
   - mkdir /run/phpmyadmin
