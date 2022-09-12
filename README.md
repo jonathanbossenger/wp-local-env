@@ -161,6 +161,14 @@ sudo sitedrop mysite
 
 The sitedrop script will completely delete all directories, files, configuration, and database for the site. It will also remove the record from your /etc/hosts file.
 
+### MySQL credentials
+
+The MySQL database created for your site will have the same name as the slug provided.
+
+If you use a hypenated slug (eg `wp-local-env`), the database name will be that slug, without the hyphens (eg `wplocalenv`). 
+
+MySQL database names are truncated at 16 characters, so try not to create a site with a slug longer then 16 characters.
+
 ### PHP version
 
 By default, all new sites will be running the latest version of PHP (currently 8.1). To use the last major version of PHP (currently 7.4), run the following command when setting up a new site:
