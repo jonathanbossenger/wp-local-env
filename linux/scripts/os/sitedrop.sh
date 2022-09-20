@@ -2,7 +2,15 @@
 
 SITE_NAME=$1
 VM_NAME=wp-local-env
-VM_IP=192.168.64.2
+
+VM_DATA=$( multipass info --format json wp-local-env )
+read -r -d '' JXA <<EOF
+function run() {
+	var info = JSON.parse(\`$VM_DATA\`);
+	return info.info["wp-local-env"].ipv4;
+}
+EOF
+VM_IP=$( osascript -l 'JavaScript' <<< "${JXA}" )
 
 SSL_CERTS_DIRECTORY=~/wp-local-env/ssl-certs
 SITES_DIRECTORY=~/wp-local-env/sites
