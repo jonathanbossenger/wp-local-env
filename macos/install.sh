@@ -3,7 +3,7 @@
 # Launch the new instance
 echo "Launching Multipass VM..."
 curl -o- https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/config/cloud-init-for-wp-local-env.yaml > cloud-init-for-wp-local-env.yaml
-multipass launch --name wp-local-env --mem 2G --disk 10G --cpus 2 --cloud-init cloud-init-for-wp-local-env.yaml
+multipass launch --timeout 600 --name wp-local-env --mem 2G --disk 10G --cpus 2 --cloud-init cloud-init-for-wp-local-env.yaml
 rm cloud-init-for-wp-local-env.yaml
 
 # Set up the shared directories
