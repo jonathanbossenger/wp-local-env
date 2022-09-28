@@ -3,7 +3,7 @@
 # Launch the new instance
 echo "Launching Multipass VM..."
 curl -o- https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/config/cloud-init-for-wp-local-env.yaml > cloud-init-for-wp-local-env.yaml
-multipass launch --name wp-local-env --mem 2G --disk 10G --cpus 2 --cloud-init cloud-init-for-wp-local-env.yaml
+multipass launch --timeout 600 --name wp-local-env --mem 2G --disk 10G --cpus 2 --cloud-init cloud-init-for-wp-local-env.yaml
 rm cloud-init-for-wp-local-env.yaml
 
 INSTANCE_IP=multipass info --format json wp-local-env | python3 -c "import sys, json; print(json.load(sys.stdin)['info']['wp-local-env']['ipv4'][0])"
