@@ -7,8 +7,8 @@ echo "export GOPATH=/run/gocode" >> ~/.profile
 source ~/.profile
 go get github.com/mailhog/MailHog
 go get github.com/mailhog/mhsendmail
-cp /run/gocode/bin/MailHog /usr/local/bin/mailhog
-cp /run/gocode/bin/mhsendmail /usr/local/bin/mhsendmail
+cp /run/gocode/bin/MailHog /usr/local/bin/mailhog@latest
+cp /run/gocode/bin/mhsendmail /usr/local/bin/mhsendmail@latest
 # Configure Sendmail for PHP
 echo "sendmail_path=/usr/local/bin/mhsendmail" >> /etc/php/8.1/apache2/conf.d/user.ini
 service apache2 restart
