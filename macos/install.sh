@@ -6,6 +6,15 @@ curl -o- https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/
 multipass launch --timeout 600 --name wp-local-env --mem 2G --disk 10G --cpus 2 --cloud-init cloud-init-for-wp-local-env.yaml
 rm cloud-init-for-wp-local-env.yaml
 
+INSTANCE_DATA=$( multipass info --format json wp-local-env )
+read -r -d '' JXA <<EOF
+function run() {
+	var info = JSON.parse(\`$INSTANCE_DATA\`);
+	return info.info["wp-local-env"].ipv4;
+}
+EOF
+INSTANCE_IP=$( osascript -l 'JavaScript' <<< "${JXA}" )
+
 # Set up the shared directories
 echo "Setting up shared directories..."
 mkdir -p ~/wp-local-env
@@ -34,7 +43,11 @@ chmod +x sitedrop.sh
 # replace wp-local-env with $USER
 # https://stackoverflow.com/questions/4247068/sed-command-with-i-option-failing-on-mac-but-works-on-linux
 sed -i .bak s/"HOME_USER=wp-local-env"/"HOME_USER=$USER"/g sitesetup.sh
+# replace VM_IP with $INSTANCE_IP
+sed -i .bak s/"VM_IP=192.168.64.2"/"VM_IP=$INSTANCE_IP"/g sitesetup.sh
+sed -i .bak s/"VM_IP=192.168.64.2"/"VM_IP=$INSTANCE_IP"/g sitedrop.sh
 rm sitesetup.sh.bak
+rm sitedrop.sh.bak
 sudo mv sitesetup.sh /usr/local/bin/sitesetup
 sudo mv sitedrop.sh /usr/local/bin/sitedrop
 
@@ -44,12 +57,4 @@ curl -o- https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/
 chmod +x sitehosts.sh
 sudo mv sitehosts.sh /usr/local/bin/sitehosts
 
-INSTANCE_DATA=$( multipass info --format json wp-local-env )
-read -r -d '' JXA <<EOF
-function run() {
-	var info = JSON.parse(\`$INSTANCE_DATA\`);
-	return info.info["wp-local-env"].ipv4;
-}
-EOF
-INSTANCE_IP=$( osascript -l 'JavaScript' <<< "${JXA}" )
 echo "Done, wp-local-env is ready to use at $INSTANCE_IP!"
