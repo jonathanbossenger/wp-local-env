@@ -181,7 +181,7 @@ Currently, only PHP 8.1 or 7.4 are supported.
 
 ### Installing WordPress
 
-You'd think that given this has a `wp` prefix, it would include a way to install WordPress? Well, that was never the point. The point is, and always was, to make something that allowed you to install WordPress in the way you prefer. [Download](https://wordpress.org/download/) and extract the zip to the site directory, use [WP-CLI](https://developer.wordpress.org/cli/commands/core/download/), or use whatever you want. It's up to you. That's the point.
+You'd think that given this has a `wp` prefix, it would include a way to install WordPress? Well, that was never the goal. The goal is, and always was, to make something that gave you the local infrastructure you to install WordPress in the way you prefer. [Download](https://wordpress.org/download/) and extract the zip to the site directory, use [WP-CLI](https://developer.wordpress.org/cli/commands/core/download/), or use whatever you want. It's up to you. That's the point.
 
 ## Additional Software
 

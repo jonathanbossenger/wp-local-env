@@ -5,8 +5,8 @@ echo "Installing MailHog"
 mkdir /run/gocode
 echo "export GOPATH=/run/gocode" >> ~/.profile
 source ~/.profile
-go get github.com/mailhog/MailHog
-go get github.com/mailhog/mhsendmail
+go install github.com/mailhog/MailHog@latest
+go install github.com/mailhog/mhsendmail@latest
 cp /run/gocode/bin/MailHog /usr/local/bin/mailhog
 cp /run/gocode/bin/mhsendmail /usr/local/bin/mhsendmail
 # Configure Sendmail for PHP
