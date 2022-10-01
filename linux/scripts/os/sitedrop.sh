@@ -2,10 +2,11 @@
 
 SITE_NAME=$1
 VM_NAME=wp-local-env
+HOME_USER=wp-local-env
 VM_IP=192.168.64.2
 
-SSL_CERTS_DIRECTORY=~/wp-local-env/ssl-certs
-SITES_DIRECTORY=~/wp-local-env/sites
+SSL_CERTS_DIRECTORY=/home/$HOME_USERwp-local-env/ssl-certs
+SITES_DIRECTORY=/home/$HOME_USERwp-local-env/sites
 
 echo "Deleting certs.."
 

@@ -36,6 +36,7 @@ chmod +x sitedrop.sh
 # replace wp-local-env with $USER
 # https://stackoverflow.com/questions/4247068/sed-command-with-i-option-failing-on-mac-but-works-on-linux
 sed -i s/"HOME_USER=wp-local-env"/"HOME_USER=$USER"/g sitesetup.sh
+sed -i s/"HOME_USER=wp-local-env"/"HOME_USER=$USER"/g sitedrop.sh
 # replace VM_IP with $INSTANCE_IP
 sed -i s/"VM_IP=192.168.64.2"/"VM_IP=$INSTANCE_IP"/g sitesetup.sh
 sed -i s/"VM_IP=192.168.64.2"/"VM_IP=$INSTANCE_IP"/g sitedrop.sh
