@@ -7,12 +7,12 @@ HOME_USER=wp-local-env
 VM_IP=192.168.64.2
 
 SSL_CERTS_DIRECTORY=/home/$HOME_USER/wp-local-env/ssl-certs
-SITES_DIRECTORY=/home/$HOME_USERwp-local-env/sites
+SITES_DIRECTORY=/home/$HOME_USER/wp-local-env/sites
 
 echo "Creating certs.."
 
-cd $SSL_CERTS_DIRECTORY
-mkcert "$SITE_NAME".test
+MKCERT_EXECUTABLE=/home/linuxbrew/.linuxbrew/bin/mkcert
+runuser -l wp-local-env -c "cd $SSL_CERTS_DIRECTORY && $MKCERT_EXECUTABLE $SITE_NAME.test"
 
 echo "Setting up hosts record..."
 

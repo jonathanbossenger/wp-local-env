@@ -40,6 +40,9 @@ sed -i s/"HOME_USER=wp-local-env"/"HOME_USER=$USER"/g sitedrop.sh
 # replace VM_IP with $INSTANCE_IP
 sed -i s/"VM_IP=192.168.64.2"/"VM_IP=$INSTANCE_IP"/g sitesetup.sh
 sed -i s/"VM_IP=192.168.64.2"/"VM_IP=$INSTANCE_IP"/g sitedrop.sh
+# replace wp-local-env with $USER
+sed -i s/"runuser -l wp-local-env"/"runuser -l $USER"/g sitesetup.sh
+
 # install scripts
 sudo mv sitesetup.sh /usr/local/bin/sitesetup
 sudo mv sitedrop.sh /usr/local/bin/sitedrop

@@ -46,7 +46,7 @@ SSL_VIRTUAL_HOST="<IfModule mod_ssl.c>
     </VirtualHost>
 </IfModule>"
 
-if [ $PHP_VERSION == '7.4' ]; then
+if [ "$PHP_VERSION" == '7.4' ]; then
     SSL_VIRTUAL_HOST="<IfModule mod_ssl.c>
         <VirtualHost _default_:443>
             ServerName $SITE_NAME.test
