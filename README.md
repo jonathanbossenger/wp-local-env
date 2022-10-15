@@ -105,9 +105,15 @@ mkcert -install
 Once you have the [requirements](#Requirements) installed, you can install wp-local-env by running the following commands:
 
 1. Download the installer script
+  1. Mac:
 ```
 curl -o- https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/macos/install.sh > wp_local_env_install.sh
 ```
+  2. Linux:
+```
+curl -o- https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/macos/install.sh > wp_local_env_install.sh
+```
+
 2. Make the script executable
 ```
 chmod +x wp_local_env_install.sh
