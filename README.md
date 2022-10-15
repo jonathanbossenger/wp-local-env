@@ -12,7 +12,7 @@
 
 ## Introduction
 
-wp-local-env is a cross OS (macOS, Windows, Linux) local development environment for WordPress. It is built on top of [Multipass](https://www.docker.com/) for minimal overhead and the fastest possible boot time.
+wp-local-env is a cross OS (macOS, Windows, Linux) local development environment for WordPress (or any other PHP, MySQL web application). It is built on top of [Multipass](https://www.docker.com/) for minimal overhead and the fastest possible boot time.
 
 ## Requirements
 
