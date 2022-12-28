@@ -19,6 +19,7 @@ VIRTUAL_HOST="<VirtualHost *:80>
 
 echo "$VIRTUAL_HOST" | sudo tee -a "$SITE_CONFIG_PATH"
 
+## default virtual host
 SSL_VIRTUAL_HOST="<IfModule mod_ssl.c>
     <VirtualHost _default_:443>
         ServerName $SITE_NAME.test
@@ -46,6 +47,41 @@ SSL_VIRTUAL_HOST="<IfModule mod_ssl.c>
     </VirtualHost>
 </IfModule>"
 
+## PHP 8.0 virtual host
+if [ "$PHP_VERSION" == '8.0' ]; then
+    SSL_VIRTUAL_HOST="<IfModule mod_ssl.c>
+        <VirtualHost _default_:443>
+            ServerName $SITE_NAME.test
+            ServerAdmin webmaster@$SITE_NAME.test
+            DocumentRoot $SITES_DIRECTORY/$SITE_NAME
+            <Directory \"$SITES_DIRECTORY/$SITE_NAME\">
+                #Require local
+                Order allow,deny
+                Allow from all
+                AllowOverride all
+                # New directive needed in Apache 2.4.3:
+                Require all granted
+            </Directory>
+            ErrorLog \${APACHE_LOG_DIR}/$SITE_NAME-error.log
+            CustomLog \${APACHE_LOG_DIR}/$SITE_NAME-access.log combined
+            SSLEngine on
+            SSLCertificateFile  $SSL_CERTS_DIRECTORY/$SITE_NAME.test.pem
+            SSLCertificateKeyFile $SSL_CERTS_DIRECTORY/$SITE_NAME.test-key.pem
+            <FilesMatch \.php$>
+                # From the Apache version 2.4.10 and above, use the SetHandler to run PHP as a fastCGI process s>
+                SetHandler \"proxy:unix:/run/php/php8.0-fpm.sock|fcgi://localhost\"
+            </FilesMatch>
+            <FilesMatch \"\.(cgi|shtml|phtml|php)\$\">
+                    SSLOptions +StdEnvVars
+            </FilesMatch>
+            <Directory /usr/lib/cgi-bin>
+                    SSLOptions +StdEnvVars
+            </Directory>
+        </VirtualHost>
+    </IfModule>"
+fi
+
+## PHP 7.4 virtual host
 if [ "$PHP_VERSION" == '7.4' ]; then
     SSL_VIRTUAL_HOST="<IfModule mod_ssl.c>
         <VirtualHost _default_:443>
