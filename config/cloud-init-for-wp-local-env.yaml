@@ -25,11 +25,16 @@ runcmd:
   - apt install php libapache2-mod-php php-mysql php-common php-xml php-xmlrpc php-curl php-gd php-imagick php-cli php-dev php-imap php-mbstring php-soap php-zip -y
   # Enable Apache modules
   - a2enmod ssl rewrite
-  # Set up PHP 8.0 using FastCGI
-  - apt-get install libapache2-mod-fcgid php8.0 php8.0-fpm php8.0-mysql php8.0-common php8.0-xml php8.0-xmlrpc php8.0-curl php8.0-gd php8.0-imagick php8.0-mbstring php8.0-soap php8.0-zip -y
-  - sudo systemctl start php8.0-fpm
+  - echo "Installing Legacy PHP"
+  # Install FastCGI Mod
+  - apt-get install libapache2-mod-fcgid
   - a2enmod actions alias proxy_fcgi fcgid
-  - service apache2 restart
+  # Set up PHP 8.1 using FastCGI
+  - apt-get install php8.1 php8.1-fpm php8.1-mysql php8.1-common php8.1-xml php8.1-xmlrpc php8.1-curl php8.1-gd php8.1-imagick php8.1-mbstring php8.1-soap php8.1-zip -y
+  - sudo systemctl start php8.1-fpm
+  # Set up PHP 8.0 using FastCGI
+  - apt-get install php8.0 php8.0-fpm php8.0-mysql php8.0-common php8.0-xml php8.0-xmlrpc php8.0-curl php8.0-gd php8.0-imagick php8.0-mbstring php8.0-soap php8.0-zip -y
+  - sudo systemctl start php8.0-fpm
   # Set up PHP 7.4 using FastCGI
   - apt-get php7.4 php7.4-fpm php7.4-mysql php7.4-common php7.4-xml php7.4-xmlrpc php7.4-curl php7.4-gd php7.4-imagick php7.4-mbstring php7.4-soap php7.4-zip -y
   - sudo systemctl start php7.4-fpm
@@ -49,16 +54,29 @@ runcmd:
   - sed -i s/"export APACHE_RUN_GROUP=www-data"/"export APACHE_RUN_GROUP=ubuntu"/g /etc/apache2/envvars
   - sed -i s/"index.html"/"index.php index.html"/g /etc/apache2/mods-enabled/dir.conf
   - echo "Configuring PHP.ini"
+  - # Configure PHP.ini for 8.2
+  - touch /etc/php/8.2/apache2/conf.d/user.ini
+  - echo "display_errors=On" >> /etc/php/8.2/apache2/conf.d/user.ini
+  - echo "memory_limit=128M" >> /etc/php/8.2/apache2/conf.d/user.ini
+  - echo "upload_max_filesize=128M" >> /etc/php/8.2/apache2/conf.d/user.ini
+  - echo "post_max_size=1024M" >> /etc/php/8.2/apache2/conf.d/user.ini
+  - echo "max_execution_time=360" >> /etc/php/8.2/apache2/conf.d/user.ini
+  - echo "max_input_time=360" >> /etc/php/8.2/apache2/conf.d/user.ini
+  - echo "extension=soap" >> /etc/php/8.2/apache2/conf.d/user.ini
+  - chown ubuntu:ubuntu /etc/php/8.2/apache2/conf.d/user.ini
   - # Configure PHP.ini for 8.1
-  - touch /etc/php/8.1/apache2/conf.d/user.ini
-  - echo "display_errors=On" >> /etc/php/8.1/apache2/conf.d/user.ini
-  - echo "memory_limit=128M" >> /etc/php/8.1/apache2/conf.d/user.ini
-  - echo "upload_max_filesize=128M" >> /etc/php/8.1/apache2/conf.d/user.ini
-  - echo "post_max_size=1024M" >> /etc/php/8.1/apache2/conf.d/user.ini
-  - echo "max_execution_time=360" >> /etc/php/8.1/apache2/conf.d/user.ini
-  - echo "max_input_time=360" >> /etc/php/8.1/apache2/conf.d/user.ini
-  - echo "extension=soap" >> /etc/php/8.1/apache2/conf.d/user.ini
-  - chown ubuntu:ubuntu /etc/php/8.1/apache2/conf.d/user.ini
+  - touch /etc/php/8.1/fpm/conf.d/user.ini
+  - echo "display_errors=On" >> /etc/php/8.1/fpm/conf.d/user.ini
+  - echo "memory_limit=128M" >> /etc/php/8.1/fpm/conf.d/user.ini
+  - echo "upload_max_filesize=128M" >> /etc/php/8.1/fpm/conf.d/user.ini
+  - echo "post_max_size=1024M" >> /etc/php/8.1/fpm/conf.d/user.ini
+  - echo "max_execution_time=360" >> /etc/php/8.1/fpm/conf.d/user.ini
+  - echo "max_input_time=360" >> /etc/php/8.1/fpm/conf.d/user.ini
+  - echo "extension=soap" >> /etc/php/8.1/fpm/conf.d/user.ini
+  - chown ubuntu:ubuntu /etc/php/8.1/fpm/conf.d/user.ini
+  - sed -i s/"user = www-data"/"user = ubuntu"/g /etc/php/8.1/fpm/pool.d/www.conf
+  - sed -i s/"group = www-data"/"group = ubuntu"/g /etc/php/8.1/fpm/pool.d/www.conf
+  - service php8.1-fpm restart
   - # Configure PHP.ini for 8.0
   - touch /etc/php/8.0/fpm/conf.d/user.ini
   - echo "display_errors=On" >> /etc/php/8.0/fpm/conf.d/user.ini
@@ -71,7 +89,6 @@ runcmd:
   - chown ubuntu:ubuntu /etc/php/8.0/fpm/conf.d/user.ini
   - sed -i s/"user = www-data"/"user = ubuntu"/g /etc/php/8.0/fpm/pool.d/www.conf
   - sed -i s/"group = www-data"/"group = ubuntu"/g /etc/php/8.0/fpm/pool.d/www.conf
-  - service apache2 restart
   - service php8.0-fpm restart
   - # Configure PHP.ini for 7.4
   - touch /etc/php/7.4/fpm/conf.d/user.ini
@@ -85,8 +102,8 @@ runcmd:
   - chown ubuntu:ubuntu /etc/php/7.4/fpm/conf.d/user.ini
   - sed -i s/"user = www-data"/"user = ubuntu"/g /etc/php/7.4/fpm/pool.d/www.conf
   - sed -i s/"group = www-data"/"group = ubuntu"/g /etc/php/7.4/fpm/pool.d/www.conf
-  - service apache2 restart
   - service php7.4-fpm restart
+  - service apache2 restart
   # Create directory to save phpmyadmin data
   - mkdir /run/phpmyadmin
   # PHPMyAdmin
