@@ -149,6 +149,28 @@ The MySQL root password is `password`.
 
 ## Usage
 
+### Authenticate the host machine
+
+Since Multipass version 1.9, it is required to authenticate the host machine with the new multipass instance. To do this, first create a local Multipass passphrase:
+
+```
+multipass set local.passphrase
+```
+
+You will be asked to enter, and then confirm the passphrase.
+
+Next, authenticate the host machine
+
+```
+multipass authenticate
+```
+
+You will also need to run this as the sudo user
+
+```
+sudo multipass authenticate
+```
+
 ### Provisioning sites
 
 wp-local-env uses the two scripts installed on your local machine to set up sites. 
