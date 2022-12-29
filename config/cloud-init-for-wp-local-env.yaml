@@ -32,7 +32,7 @@ runcmd:
   - service apache2 restart
   # Set up MySQL
   - echo "Installing MySQL"
-  - sudo apt install mysql-server -y
+  - apt install mysql-server -y
   - service mysql stop
   - echo "" >> /etc/mysql/mysql.conf.d/mysqld.cnf
   - echo "default_authentication_plugin=mysql_native_password" >> /etc/mysql/mysql.conf.d/mysqld.cnf
@@ -56,15 +56,15 @@ runcmd:
   - echo "extension=soap" >> /etc/php/8.1/apache2/conf.d/user.ini
   - chown ubuntu:ubuntu /etc/php/8.1/apache2/conf.d/user.ini
   - # Configure PHP.ini for 7.4
-  - touch /etc/php/7.4/apache2/conf.d/user.ini
-  - echo "display_errors=On" >> /etc/php/7.4/apache2/conf.d/user.ini
-  - echo "memory_limit=128M" >> /etc/php/7.4/apache2/conf.d/user.ini
-  - echo "upload_max_filesize=128M" >> /etc/php/7.4/apache2/conf.d/user.ini
-  - echo "post_max_size=1024M" >> /etc/php/7.4/apache2/conf.d/user.ini
-  - echo "max_execution_time=360" >> /etc/php/7.4/apache2/conf.d/user.ini
-  - echo "max_input_time=360" >> /etc/php/7.4/apache2/conf.d/user.ini
-  - echo "extension=soap" >> /etc/php/7.4/apache2/conf.d/user.ini
-  - chown ubuntu:ubuntu /etc/php/7.4/apache2/conf.d/user.ini
+  - touch /etc/php/7.4/fpm/conf.d/user.ini
+  - echo "display_errors=On" >> /etc/php/7.4/fpm/conf.d/user.ini
+  - echo "memory_limit=128M" >> /etc/php/7.4/fpm/conf.d/user.ini
+  - echo "upload_max_filesize=128M" >> /etc/php/7.4/fpm/conf.d/user.ini
+  - echo "post_max_size=1024M" >> /etc/php/7.4/fpm/conf.d/user.ini
+  - echo "max_execution_time=360" >> /etc/php/7.4/fpm/conf.d/user.ini
+  - echo "max_input_time=360" >> /etc/php/7.4/fpm/conf.d/user.ini
+  - echo "extension=soap" >> /etc/php/7.4/fpm/conf.d/user.ini
+  - chown ubuntu:ubuntu /etc/php/7.4/fpm/conf.d/user.ini
   - sed -i s/"user = www-data"/"user = ubuntu"/g /etc/php/7.4/fpm/pool.d/www.conf
   - sed -i s/"group = www-data"/"group = ubuntu"/g /etc/php/7.4/fpm/pool.d/www.conf
   - service apache2 restart
