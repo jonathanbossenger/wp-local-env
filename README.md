@@ -149,6 +149,28 @@ The MySQL root password is `password`.
 
 ## Usage
 
+### Authenticate the host machine
+
+Since Multipass version 1.9, it is required to authenticate the host machine with the new multipass instance. To do this, first create a local Multipass passphrase:
+
+```
+multipass set local.passphrase
+```
+
+You will be asked to enter, and then confirm the passphrase.
+
+Next, authenticate the host machine
+
+```
+multipass authenticate
+```
+
+You will also need to run this as the sudo user
+
+```
+sudo multipass authenticate
+```
+
 ### Provisioning sites
 
 wp-local-env uses the two scripts installed on your local machine to set up sites. 
@@ -186,13 +208,13 @@ MySQL database names are truncated at 16 characters, so try not to create a site
 
 ### PHP version
 
-By default, all new sites will be running the latest version of PHP (currently 8.1). To use the last major version of PHP (currently 7.4), run the following command when setting up a new site:
+By default, all new sites will be running the latest version of PHP (currently 8.2). To use the last major version of PHP (currently 8.1), run the following command when setting up a new site:
 
 ```
-sudo sitesetup mysite 7.4
+sudo sitesetup mysite 8.1
 ```
 
-Currently, only PHP 8.1 or 7.4 are supported. 
+Currently, only PHP 8.2, 8.1, 8.0 and 7.4 are supported. 
 
 ### Installing WordPress
 
