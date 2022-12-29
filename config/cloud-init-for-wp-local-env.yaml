@@ -41,7 +41,7 @@ runcmd:
   - service apache2 restart
   # Set up MySQL
   - echo "Installing MySQL"
-  - sudo apt install mysql-server -y
+  - apt install mysql-server -y
   - service mysql stop
   - echo "" >> /etc/mysql/mysql.conf.d/mysqld.cnf
   - echo "default_authentication_plugin=mysql_native_password" >> /etc/mysql/mysql.conf.d/mysqld.cnf
