@@ -10,7 +10,7 @@ $ip = multipass info wp-local-env | Select-String -Pattern "IPv4" | Select-Objec
 # Create the local wp-local-env directory
 New-Item -ItemType Directory -Path "$HOME\wp-local-env"
 # Mount the wp-local-env directory to the multipass wp-local-env directory
-multipass mount C:\Users\$env:UserName\wp-local-env wp-local-env:/home/ubuntu/wp-local-env
+multipass mount $HOME\wp-local-env wp-local-env:/home/ubuntu/wp-local-env
 # Create the sites and ssl-certs directories in the wp-local-env directory
 New-Item -ItemType Directory -Path "$HOME\wp-local-env\sites"
 New-Item -ItemType Directory -Path "$HOME\wp-local-env\ssl-certs"
