@@ -88,7 +88,7 @@ mkcert -install
 
 2. Install [Chocolatey](https://docs.chocolatey.org/en-us/choco/setup#install-with-powershell.exe) package manager for Windows in Powershell
 
-3. Install mkcert with Chocolatey
+3. Open Powersehll as Administrator and install mkcert with Chocolatey
 
 ```
 choco install mkcert
