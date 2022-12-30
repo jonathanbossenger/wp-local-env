@@ -47,4 +47,6 @@ $content = Get-Content -Path "sitedrop.ps1"
 $newContent = $content -replace "VM_IP=192.168.64.2", "VM_IP=$ip"
 $newContent | Set-Content -Path 'sitedrop.ps1'
 
+Invoke-WebRequest -URI "https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/windows/scripts/os/sitehosts.ps1" -OutFile "sitehosts.ps1"
+
 Write-Host "Done, wp-local-env is ready to use at $ip!"
