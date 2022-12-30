@@ -1,11 +1,10 @@
-$siteName = $args[0]
-$phpVersion = $args[1]
-$vmName = wp-local-env
-$homeUser = wp-local-env
-$vmIp = 192.168.64.2
+$siteName=$args[0]
+$phpVersion=$args[1]
+$vmName="wp-local-env"
+$vmIp=192.168.64.2
 
-$sslCertsDirectory = "C:\Users\$homeUser\wp-local-env\ssl-certs\"
-$sitesDirectory = "C:\Users\$homeUser\wp-local-env\sites\"
+$sslCertsDirectory = "$HOME\wp-local-env\ssl-certs\"
+$sitesDirectory = "$HOME\wp-local-env\sites\"
 
 Write-Host "Creating certs..."
 Set-Location $sslCertsDirectory
