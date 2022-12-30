@@ -28,8 +28,8 @@ multipass exec wp-local-env -- chmod +x server_scripts.sh
 multipass exec wp-local-env -- sudo su root ./server_scripts.sh
 
 # Download the OS scripts
-Invoke-WebRequest -URI "https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/windows/scripts/os/sitesetup.ps1"
-Invoke-WebRequest -URI "https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/windows/scripts/os/sitedrop.ps1"
+Invoke-WebRequest -URI "https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/windows/scripts/os/sitesetup.ps1" -OutFile "sitesetup.ps1"
+Invoke-WebRequest -URI "https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/windows/scripts/os/sitedrop.ps1" -OutFile "sitedrop.ps1"
 
 # Replace HOME_USER=wp-local-env with HOME_USER=$env:UserName in the sitesetup.ps1 and sitedrop.ps1 files
 $content = Get-Content -Path "sitesetup.ps1"
@@ -52,7 +52,7 @@ Move-Item -Path "sitesetup.ps1" -Destination "C:\Windows\System32\sitesetup.ps1"
 Move-Item -Path "sitedrop.ps1" -Destination "C:\Windows\System32\sitedrop.ps1"
 
 # Download the sitehosts.ps1 file
-Invoke-WebRequest -URI "https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/windows/scripts/os/sitehosts.ps1"
+Invoke-WebRequest -URI "https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/windows/scripts/os/sitehosts.ps1" -OutFile "sitehosts.ps1"
 Move-Item -Path "sitehosts.ps1" -Destination "C:\Windows\System32\sitehosts.ps1"
 
 Write-Host "Done, wp-local-env is ready to use at $ip!"
