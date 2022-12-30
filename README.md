@@ -20,6 +20,8 @@ wp-local-env is a cross OS (macOS, Windows, Linux) local development environment
 
 You can find the Multipass installation instructions [here](https://multipass.run/install).
 
+> **Note** Multipass for Windows requires either Hyper-V enabled in the BIOS, or Virtualbox installed
+
 2. [mkcert](https://github.com/FiloSottile/mkcert): mkcert is a simple tool for making locally-trusted development certificates which require no configuration.
 
 You can find the mkcert installation instructions [here](https://github.com/FiloSottile/mkcert#installation)
