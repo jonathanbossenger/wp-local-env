@@ -8,12 +8,12 @@ Remove-Item cloud-init-for-wp-local-env.yaml
 $ip = multipass info wp-local-env | Select-String -Pattern "IPv4" | Select-Object -ExpandProperty Line | Select-Object -Skip 1 | Select-Object -ExpandProperty Line
 
 # Create the local wp-local-env directory
-New-Item -ItemType Directory -Path "C:\Users\$homeUser\wp-local-env"
+New-Item -ItemType Directory -Path "C:\Users\$env:UserName\wp-local-env"
 # Mount the wp-local-env directory to the multipass wp-local-env directory
-multipass mount C:\Users\$homeUser\wp-local-env wp-local-env:/home/ubuntu/wp-local-env
+multipass mount C:\Users\$env:UserName\wp-local-env wp-local-env:/home/ubuntu/wp-local-env
 # Create the sites and ssl-certs directories in the wp-local-env directory
-New-Item -ItemType Directory -Path "C:\Users\$homeUser\wp-local-env\sites"
-New-Item -ItemType Directory -Path "C:\Users\$homeUser\wp-local-env\ssl-certs"
+New-Item -ItemType Directory -Path "C:\Users\$env:UserName\wp-local-env\sites"
+New-Item -ItemType Directory -Path "C:\Users\$env:UserName\wp-local-env\ssl-certs"
 
 # Install MailHog on the multipass instance
 Write-Host "Installing MailHog..."
@@ -31,12 +31,12 @@ multipass exec wp-local-env -- sudo su root ./server_scripts.sh
 Invoke-WebRequest -URI "https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/windows/scripts/os/sitesetup.ps1"
 Invoke-WebRequest -URI "https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/windows/scripts/os/sitedrop.ps1"
 
-# Replace HOME_USER=wp-local-env with HOME_USER=$homeUser in the sitesetup.ps1 and sitedrop.ps1 files
+# Replace HOME_USER=wp-local-env with HOME_USER=$env:UserName in the sitesetup.ps1 and sitedrop.ps1 files
 $content = Get-Content -Path "sitesetup.ps1"
-$newContent = $content -replace "HOME_USER=wp-local-env", "HOME_USER=$homeUser"
+$newContent = $content -replace "HOME_USER=wp-local-env", "HOME_USER=$env:UserName"
 $newContent | Set-Content -Path 'sitesetup.ps1'
 $content = Get-Content -Path "sitedrop.ps1"
-$newContent = $content -replace "HOME_USER=wp-local-env", "HOME_USER=$homeUser"
+$newContent = $content -replace "HOME_USER=wp-local-env", "HOME_USER=$env:UserName"
 $newContent | Set-Content -Path 'sitedrop.ps1'
 
 # Replace VM_IP=192.168.64.2 with VM_IP=ip in the sitesetup.ps1 and sitedrop.ps1 files
