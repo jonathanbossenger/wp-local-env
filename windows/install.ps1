@@ -47,12 +47,4 @@ $content = Get-Content -Path "sitedrop.ps1"
 $newContent = $content -replace "VM_IP=192.168.64.2", "VM_IP=$ip"
 $newContent | Set-Content -Path 'sitedrop.ps1'
 
-# Move the sitesetup.ps1 and sitedrop.ps1 files to the System32 directory
-Move-Item -Path "sitesetup.ps1" -Destination "C:\Windows\System32\sitesetup.ps1"
-Move-Item -Path "sitedrop.ps1" -Destination "C:\Windows\System32\sitedrop.ps1"
-
-# Download the sitehosts.ps1 file
-Invoke-WebRequest -URI "https://raw.githubusercontent.com/jonathanbossenger/wp-local-env/trunk/windows/scripts/os/sitehosts.ps1" -OutFile "sitehosts.ps1"
-Move-Item -Path "sitehosts.ps1" -Destination "C:\Windows\System32\sitehosts.ps1"
-
 Write-Host "Done, wp-local-env is ready to use at $ip!"
