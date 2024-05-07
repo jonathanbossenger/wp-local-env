@@ -36,7 +36,7 @@ runcmd:
   - apt-get install php8.0 php8.0-fpm php8.0-mysql php8.0-common php8.0-xml php8.0-xmlrpc php8.0-curl php8.0-gd php8.0-imagick php8.0-mbstring php8.0-soap php8.0-zip -y
   - sudo systemctl start php8.0-fpm
   # Set up PHP 7.4 using FastCGI
-  - apt-get php7.4 php7.4-fpm php7.4-mysql php7.4-common php7.4-xml php7.4-xmlrpc php7.4-curl php7.4-gd php7.4-imagick php7.4-mbstring php7.4-soap php7.4-zip -y
+  - apt-get install php7.4 php7.4-fpm php7.4-mysql php7.4-common php7.4-xml php7.4-xmlrpc php7.4-curl php7.4-gd php7.4-imagick php7.4-mbstring php7.4-soap php7.4-zip -y
   - sudo systemctl start php7.4-fpm
   - service apache2 restart
   # Set up MySQL
