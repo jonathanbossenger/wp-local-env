@@ -10,6 +10,8 @@ runcmd:
   - echo "Setting the hostname"
   - echo "wp-local-env" > /etc/hostname
   - hostname -F /etc/hostname
+  # Installing multipass-sshfs (needed for mounting)
+  - snap install multipass-sshfs
   # Adding required repositories
   - echo "Adding repositories"
   - add-apt-repository --no-update universe
@@ -53,7 +55,6 @@ runcmd:
   - sed -i s/"export APACHE_RUN_USER=www-data"/"export APACHE_RUN_USER=ubuntu"/g /etc/apache2/envvars
   - sed -i s/"export APACHE_RUN_GROUP=www-data"/"export APACHE_RUN_GROUP=ubuntu"/g /etc/apache2/envvars
   - sed -i s/"index.html"/"index.php index.html"/g /etc/apache2/mods-enabled/dir.conf
-  - echo "Configuring PHP.ini"
   - echo "Configuring PHP.ini"
   - touch /etc/php/8.3/apache2/conf.d/user.ini
   - echo "display_errors=On" >> /etc/php/8.3/apache2/conf.d/user.ini
