@@ -18,7 +18,9 @@ INSTANCE_IP=$( osascript -l 'JavaScript' <<< "${JXA}" )
 # Set up the shared directories
 echo "Setting up shared directories..."
 mkdir -p ~/wp-local-env
-multipass mount ~/wp-local-env wp-local-env:/home/ubuntu/wp-local-env
+multipass stop wp-local-env
+multipass mount --type=native ~/wp-local-env wp-local-env:/home/ubuntu/wp-local-env
+multipass start wp-local-env
 cd ~/wp-local-env
 mkdir -p sites ssl-certs
 
